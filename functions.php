@@ -410,6 +410,24 @@ function twenty_twenty_one_scripts() {
 	// Print styles.
 	wp_enqueue_style( 'twenty-twenty-one-print-style', get_template_directory_uri() . '/assets/css/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
 
+	//Colocando css e js dos tema RCC
+	$ver = time();
+	wp_register_style( 'dsgov-class', get_template_directory_uri() . '/assets/css/dsgov.css', false, $ver );
+	wp_enqueue_style ( 'dsgov-class' );
+
+	wp_register_style( 'dsgovserprodesign-class', "https://cdn.dsgovserprodesign.estaleiro.serpro.gov.br/design-system/fonts/rawline/css/rawline.css", false, $ver );
+	wp_enqueue_style ( 'dsgovserprodesign-class' );
+
+	wp_register_style( 'googleapis-class', "https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&amp;display=swap", false, $ver );
+	wp_enqueue_style ( 'googleapis-class' );
+
+	wp_register_style( 'font-awesome-class', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css", false, $ver );
+	wp_enqueue_style ( 'font-awesome-class' );
+
+	wp_enqueue_script( 'dsgov-js', get_template_directory_uri() . '/assets/js/dsgov.js' , array('jquery'), $ver );
+
+
+
 	// Threaded comment reply styles.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
