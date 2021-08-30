@@ -64,9 +64,10 @@
               <button class="br-button circle" type="button" aria-label="Abrir Busca" data-toggle="search" data-target=".header-search"><i class="fas fa-search" aria-hidden="true"></i>
               </button>
             </div>
+			<?php if(!is_user_logged_in()) : ?>
             <div class="header-login">
               <div class="header-sign-in">
-                <button class="br-button sign-in small" type="button" data-trigger="login"><i class="fas fa-user" aria-hidden="true"></i><span class="d-sm-inline">Entrar</span>
+                <button class="br-button sign-in small" type="button" onclick="myFunctionEntrar()"><i class="fas fa-user" aria-hidden="true"></i><span class="d-sm-inline">Entrar</span>
                 </button>
               </div>
               <div class="header-avatar d-none">
@@ -127,6 +128,7 @@
                 </div>
               </div>
             </div>
+			<?php endif; ?>
           </div>
         </div>
         <div class="header-bottom">
@@ -195,7 +197,7 @@
             <div class="br-input has-icon">
               <label for="main-searchbox">Texto da pesquisa</label>
               <input class="has-icon" id="main-searchbox" type="search" placeholder="O que você procura?" />
-              <button class="br-button circle small" type="button" aria-label="Pesquisar"><i class="fas fa-search" aria-hidden="true"></i>
+              <button class="br-button circle small" type="button" aria-label="Pesquisar" onclick="myFunctionBusca()"><i class="fas fa-search" aria-hidden="true"></i>
               </button>
             </div>
             <button class="br-button circle search-close" type="button" aria-label="Fechar Busca" data-dismiss="search"><i class="fas fa-times" aria-hidden="true"></i>
