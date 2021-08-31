@@ -159,10 +159,10 @@
                           <div class="menu-title"><img src="<?php echo(esc_url( get_template_directory_uri() ) . '/assets/images/govbr-logo-large.png')?>" alt="Imagem ilustrativa" /></div>
                         </div>
                         <nav class="menu-body">
-                          <div><a class="menu-item" href="http://rcc.ibict.br/">
+                          <div><a class="menu-item" href="/">
                             <span class="content">Início</span></a>
                           </div>
-                          <div><a class="menu-item" href="http://rcc.ibict.br/#contato"><span class="content">Contato</span></a>
+                          <div><a class="menu-item" href="/#contato"><span class="content">Contato</span></a>
                           </div>
                         </nav>
                         <div class="menu-footer">
