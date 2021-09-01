@@ -1,5 +1,6 @@
 function myFunctionEntrar() {
-    window.location.href = "/wp-login.php";
+    //window.location.href = "https://acesso.gov.br/";
+    window.open('https://acesso.gov.br/', '_blank');
 }
 
 function myFunctionBusca() {

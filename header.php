@@ -72,7 +72,7 @@
               <button class="br-button circle" type="button" aria-label="Abrir Busca" data-toggle="search" data-target=".header-search"><i class="fas fa-search" aria-hidden="true"></i>
               </button>
             </div>
-			<?php if(!is_user_logged_in()) : ?>
+			<?php //if(!is_user_logged_in()) : ?>
             <div class="header-login">
               <div class="header-sign-in">
                 <button class="br-button sign-in small" type="button" onclick="myFunctionEntrar()"><i class="fas fa-user" aria-hidden="true"></i><span class="d-sm-inline">Entrar</span>
@@ -136,7 +136,7 @@
                 </div>
               </div>
             </div>
-			<?php endif; ?>
+			<?php //endif; ?>
           </div>
         </div>
         <div class="header-bottom">
