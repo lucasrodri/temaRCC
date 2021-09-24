@@ -661,3 +661,44 @@ function twentytwentyone_add_ie_class() {
 	<?php
 }
 add_action( 'wp_footer', 'twentytwentyone_add_ie_class' );
+
+/*
+*****************************************************************
+Adicionando funções do tema
+*/
+
+add_shortcode('shortcode_breadcrumb', 'dsgov_breadcrumb');
+
+function dsgov_breadcrumb() {
+	echo '<div class="col pt-3 pb-3">';
+	echo '<div class="br-breadcrumb">';
+	echo '<ul class="crumb-list">';
+	//casinha home
+	echo '<li class="crumb home">';
+	$onclick = " onclick=\"window.location.href='".home_url()."'\" ";
+	echo '<div class="br-button circle"'. $onclick .'><span class="sr-only">Página inicial</span><i class="icon fas fa-home"></i></div>';
+	echo '</li>';
+
+	if (is_category() || is_single()) {
+		echo '<li class="crumb"><i class="icon fas fa-chevron-right"></i>';
+		//the_category(' &bull; ');
+		echo '<a href="'.get_post_type_archive_link( 'post' ).'"> Post </a>';
+		echo '</li>';
+
+		if (is_single()) {
+			echo '<li class="crumb" data-active="active"><i class="icon fas fa-chevron-right"></i><span>';
+			the_title();
+			echo '</span></li>';
+		}
+	} elseif (is_page()) {
+		echo '<li class="crumb" data-active="active"><i class="icon fas fa-chevron-right"></i><span>';
+		the_title();
+		echo '</span></li>';
+	} elseif (is_search()) {
+		echo '&nbsp;&nbsp;<img src="/wp-content/uploads/2021/09/seta.png">&nbsp;&nbsp;Resultados de busca por ... ';
+		echo '"<em>';
+		echo the_search_query();
+		echo '</em>"';
+	}
+	echo '</div></div>';
+}
