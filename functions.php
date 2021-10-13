@@ -702,3 +702,17 @@ function dsgov_breadcrumb() {
 	}
 	echo '</div></div>';
 }
+
+/*  
+ * -- Novo formato para as imagens do cardápio --
+*/
+function thumbnail_post() {
+	add_image_size('thumbnail_post', 1200, 400, true);
+}
+add_action('after_setup_theme', 'thumbnail_post');
+
+
+function thumbnail_blog() {
+	add_image_size('thumbnail_blog', 253, 158, true);
+}
+add_action('after_setup_theme', 'thumbnail_blog');

@@ -14,8 +14,15 @@ get_header();
 /* Start the Loop */
 while ( have_posts() ) :
 	the_post();
+	
+	echo "<div class=\"container-lg\">";
+	echo "<div class=\"breadcrumb-post\" style=\"margin-left: -24px;\">";
+	echo do_shortcode('[shortcode_breadcrumb]');
+	echo "</div></div>";
 
 	get_template_part( 'template-parts/content/content-single' );
+
+	echo "<div class=\"container-lg\">";
 
 	if ( is_attachment() ) {
 		// Parent post navigation.
@@ -45,6 +52,7 @@ while ( have_posts() ) :
 			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
 		)
 	);
+	echo "</div>";
 endwhile; // End of the loop.
 
 get_footer();
