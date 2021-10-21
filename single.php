@@ -22,7 +22,7 @@ while ( have_posts() ) :
 
 	get_template_part( 'template-parts/content/content-single' );
 
-	echo "<div class=\"container-lg\">";
+	echo "<div class=\"container-lg d-block\">";
 
 	if ( is_attachment() ) {
 		// Parent post navigation.
@@ -39,6 +39,7 @@ while ( have_posts() ) :
 		comments_template();
 	}
 
+	/* Removendo setinha que aponta para outos posts
 	// Previous/next post navigation.
 	$twentytwentyone_next = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' );
 	$twentytwentyone_prev = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' );
@@ -52,6 +53,7 @@ while ( have_posts() ) :
 			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
 		)
 	);
+	*/
 	echo "</div>";
 endwhile; // End of the loop.
 

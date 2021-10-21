@@ -716,3 +716,87 @@ function thumbnail_blog() {
 	add_image_size('thumbnail_blog', 253, 158, true);
 }
 add_action('after_setup_theme', 'thumbnail_blog');
+
+/*  
+ * -- Funções para template do post --
+*/
+function funcao_publicado_em() {
+	//<time class="entry-date published updated" datetime="2021-10-20T19:04:17-03:00">20 de outubro de 2021</time>
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+
+	$time_string = sprintf(
+		$time_string,
+		esc_attr( get_the_date( DATE_W3C ) ), //mostrado dentro da tag datetime no html
+		esc_html( get_the_date( "d/m/Y H:i") ) //mostrado no post
+	);
+	echo '<span class="posted-on">';
+	printf(
+		/* translators: %s: Publish date. */
+		'Publicado em %s',
+		$time_string // phpcs:ignore WordPress.Security.EscapeOutput
+	);
+	echo '</span>';
+}
+
+function funcao_post_footer() {
+	if ( has_category() || has_tag() ) {
+
+        echo '<div class="post-taxonomies">';
+
+        /* translators: Used between list items, there is a space after the comma. */
+        $categories_list = get_the_category_list( __( ', ', 'twentytwentyone' ) );
+        if ( $categories_list ) {
+          printf(
+            /* translators: %s: List of categories. */
+            '<span class="cat-links">' . esc_html__( 'Categorized as %s', 'twentytwentyone' ) . ' </span>',
+            $categories_list // phpcs:ignore WordPress.Security.EscapeOutput
+          );
+        }
+
+        /* translators: Used between list items, there is a space after the comma. */
+        $tags_list = get_the_tag_list( '', __( ', ', 'twentytwentyone' ) );
+        if ( $tags_list ) {
+          printf(
+            /* translators: %s: List of tags. */
+            '<span class="tags-links">' . esc_html__( 'Tagged %s', 'twentytwentyone' ) . '</span>',
+            $tags_list // phpcs:ignore WordPress.Security.EscapeOutput
+          );
+        }
+        echo '</div>';
+	}
+
+	// Edit post link.
+	edit_post_link(
+		sprintf(
+		/* translators: %s: Name of current post. Only visible to screen readers. */
+		esc_html__( 'Edit %s', 'twentytwentyone' ),
+		'<span class="screen-reader-text">' . get_the_title() . '</span>'
+		),
+		'<span class="edit-link">',
+		'</span><br>'
+	);
+}
+
+add_shortcode('shortcode_social_links', 'exibir_social_links');
+
+function exibir_social_links() {
+	echo '<div class="social-links">';
+	echo '<label>Compartilhe: </label>';
+	echo '<a href="http://www.facebook.com/sharer.php?u='.get_the_permalink().'" title="Facebook" class="">';
+	echo '<span class="fab fa-facebook-f"></span>';
+	echo '</a>';
+	
+	echo '<a href="https://twitter.com/share?text='.get_the_title().'"&amp;url='.get_the_permalink().'" title="Twitter" class="">';
+	echo '<span class="fab fa-twitter"></span>';
+	echo '</a>';
+
+	echo '<a class="link-clipboard" onclick="event.preventDefault()" title="Copiar para área de transferência" href="'.get_the_permalink().'">';
+	echo '<span class="fas fa-link"></span>';
+	echo '</a>';
+	
+	// echo '<a class="toggle-social-links">';
+	// echo '<span class="fas fa-share-alt"></span>';
+	// echo '<span class="fas fa-times"></span>';
+	// echo '</a>';
+	echo '</div>';
+}
