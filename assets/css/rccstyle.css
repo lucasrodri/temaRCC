@@ -79,8 +79,85 @@
 }
 
 
+/*Classes para os posts*/
+.titulo-post {
+    font-family: Rawline;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 50px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #1351B4;
+    margin-top: 48px;
+    margin-bottom: 20px;
+}
 
+.posted-rcc {
+    font-family: Rawline;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 25px;
+    color: #555555;
+}
 
+.container-rcc-post{
+    width: 60%;
+}
 
+.social-media-rcc{
+    display: flex;
+    justify-content: end;
+}
 
+.entry-content-rcc{
+    margin-top: 40px;
+    font-family: Rawline;
+    font-style: normal;
+    font-weight: normal;
+    color: #555555;
+}
 
+.entry-content-rcc p{
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.entry-content-rcc a{
+    font-size: 14px;
+    line-height: 32px;
+    color: #1351B4;
+}
+
+.cat-links-rcc {
+    font-family: Rawline;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+
+    color: #000000;
+}
+
+.tag-links-rcc{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.tag-links-rcc a{
+    background: #EDEDED;
+    padding: 10px;
+    margin-right: 8px;
+    color: #555;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 17px;
+    align-items: center;
+}
+
+.tag-links-rcc a:hover{
+    background: #CECCCC;
+}
