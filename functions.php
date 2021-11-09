@@ -800,3 +800,191 @@ function exibir_social_links() {
 	// echo '</a>';
 	echo '</div>';
 }
+
+
+/************************************************************************************************REDES */
+
+/* Função para padronizar a chamada de custom post types por categoria e subcategoria
+ * https://wordpress.stackexchange.com/questions/23136/get-custom-post-type-by-category-in-a-page-template */
+ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category', $r_terms = 'featured')
+ {
+	 $args = array(
+		 'showposts' => $r_post_num,
+		 'tax_query' => array(
+			 array(
+				 'post_type' => $r_type,
+				 'taxonomy' => $r_tax,
+				 'field' => 'slug',
+				 'terms' => array(
+					 $r_terms
+				 ),
+			 )
+		 )
+	 );
+	 query_posts($args);
+	 if (have_posts()) {
+		 echo '<ol>';
+ 
+		 while (have_posts()) : the_post();
+	 ?>
+			 <li>
+				 <p class="entry mt-1"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
+				 <?php
+ 
+				 $texto = get_field('texto');
+				 $link_visao = get_field('visao');
+ 
+				 ?>
+				 <div class="row">
+					 <div class="col-md-12 mb-3">
+						 <p class="texto"><?php echo $texto; ?></p>
+					 </div>
+ 
+					 <?php if ($link_visao) { ?>
+						 <div class="col-md-6">
+							 <span class="icon">
+								 <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+								 <a href="<?php echo $link_visao; ?>" target="_blank">Veja no Visão</a>
+							 </span>
+						 </div>
+					 <?php } ?>
+ 
+					 <div class="col-md-6">
+						 <a class="detalhesGrid" href="<?php the_permalink(); ?>" target="_blank">Saiba mais</a>
+					 </div>
+				 </div>
+			 </li>
+		 <?php
+ 
+		 endwhile;
+		 echo '</ol>';
+	 }
+	 wp_reset_postdata();
+ }
+ 
+ /**
+  * Função genérica para gerar o acordeão da página principal de acordo com a tipo do post ($r_type) e suas respectivas categorias ($r_tax)
+  * Lista:
+  * rede-de-suporte	suporte
+  * rede-de-pesquisa	pesquisa
+  */
+ function gerar_redes_principal($r_type, $r_tax)
+ {
+	 /* https://wordpress.stackexchange.com/a/215963 */
+	 $args = array(
+		 'taxonomy'	=> $r_tax,
+		 'orderby'	=> 'name',
+		 'parent'	=> 0, /* garantir que não trará as filhas */
+	 );
+ 
+ 
+	 $allthecats = get_categories($args);
+	 $categorias_id = wp_list_pluck($allthecats, 'term_id');
+	 $categorias_name = wp_list_pluck($allthecats, 'name');
+ 
+	 echo '<div class="br-accordion">';
+	 //$i = 0;
+	 //foreach ($categorias_name as $subcategoria) {
+	 for ($i = 1; $i <= sizeof($categorias_id); $i++) {
+		 $subcategoria = $categorias_name[$i];
+ 
+		 $filhos_args = array(
+			 'taxonomy'	=> $r_tax,
+			 'orderby'	=> 'name',
+			 'parent'	=> $categorias_id[$i],
+		 );
+ 
+		 $filhos_categorias  = get_categories($filhos_args);
+		 $lista_filhos = wp_list_pluck($filhos_categorias, 'name');
+ 
+		 ?>
+		 <div class="item">
+			 <button class="header" type="button" aria-controls="id<?php echo $i; ?>">
+				 <span class="title"><?php echo $subcategoria; ?></span>
+				 <span class="icon">
+					 <i class="fas fa-angle-down" aria-hidden="true"></i>
+				 </span>
+			 </button>
+		 </div>
+		 <div class="content" id="id<?php echo $i; ?>">
+			 <?php
+ 
+			 if (sizeof($lista_filhos) > 0) {
+ 
+				 foreach ($lista_filhos as $subcategoria_filho) {
+			 ?>
+ 
+					 <span class="title"><?php echo $subcategoria_filho; ?></span>
+ 
+					 <?php
+					 meu_arrr_custom_loop($r_type, -10, $r_tax, $subcategoria_filho);
+					 ?>
+ 
+			 <?php } //fechamento do foreach
+ 
+			 } else {
+				 meu_arrr_custom_loop($r_type, -10, $r_tax, $subcategoria);
+			 }
+ 
+			 ?>
+		 </div>
+	 <?php
+		 //$i += 1;
+	 }
+	 echo '</div>';
+ }
+ 
+ add_shortcode('shortcode_redes_suporte', 'redes_suporte');
+ function redes_suporte()
+ {
+	 gerar_redes_principal('rede-de-suporte', 'suporte_categoria');
+ }
+ 
+ function redes_suporte1()
+ {
+	 /* https://wordpress.stackexchange.com/a/215963 */
+	 $args = array(
+		 'taxonomy'	=> 'suporte_categoria',
+		 'orderby'	=> 'name',
+	 );
+ 
+	 $allthecats = get_categories($args);
+	 $listacategorias = wp_list_pluck($allthecats, 'name');
+ 
+	 echo '<div class="br-accordion">';
+	 $i = 0;
+	 foreach ($listacategorias as $categoria) {
+	 ?>
+		 <div class="item">
+			 <button class="header" type="button" aria-controls="id<?php echo $i; ?>">
+ 
+				 <span class="title"><?php echo $categoria; ?></span>
+ 
+				 <span class="icon">
+					 <i class="fas fa-angle-down" aria-hidden="true"></i>
+				 </span>
+			 </button>
+		 </div>
+		 <div class="content" id="id<?php echo $i; ?>">
+			 <?php meu_arrr_custom_loop('rede-de-suporte', -10, 'suporte', $categoria); ?>
+		 </div>
+ <?php
+		 $i += 1;
+	 }
+	 echo '</div>';
+ }
+ 
+ 
+ function nacin_register_slideshows_post_type() {
+	 register_post_type( 'slideshow', array(
+		 'labels' => array(
+			 'name' => 'Slideshows',
+			 'singular_name' => 'Slideshow',
+		 ),
+		 'public' => true,
+		 'show_ui' => true,
+		 'show_in_menu' => 'edit.php',
+		 'supports' => array( 'title' ,'thumbnail', 'editor' ),
+	 ) );
+ }
+ add_action( 'init', 'nacin_register_slideshows_post_type' );
