@@ -679,7 +679,7 @@ function dsgov_breadcrumb() {
 	echo '<div class="br-button circle"'. $onclick .'><span class="sr-only">Página inicial</span><i class="icon fas fa-home"></i></div>';
 	echo '</li>';
 
-	if (is_category() || is_single()) {
+	if (is_category() || is_single() || is_tag()) {
 		echo '<li class="crumb"><i class="icon fas fa-chevron-right"></i>';
 		//the_category(' &bull; ');
 		echo '<a href="'.get_post_type_archive_link( 'post' ).'"> Post </a>';
@@ -688,6 +688,10 @@ function dsgov_breadcrumb() {
 		if (is_single()) {
 			echo '<li class="crumb" data-active="active"><i class="icon fas fa-chevron-right"></i><span>';
 			the_title();
+			echo '</span></li>';
+		} else {
+			echo '<li class="crumb" data-active="active"><i class="icon fas fa-chevron-right"></i><span>';
+			echo '<a href="'.get_post_type_archive_link( 'archive' ).'"> '.get_the_archive_title().' </a>';
 			echo '</span></li>';
 		}
 	} elseif (is_page()) {
