@@ -21,7 +21,7 @@
 			?>
 		</header><!-- .entry-header -->
 
-		<div class="entry-content">
+		<div class="entry-content mt-1">
 			<?php
 			//the_content();
 			the_field('texto');
