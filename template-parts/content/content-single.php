@@ -17,19 +17,25 @@
 	<div class="container-lg">
 	<?php the_post_thumbnail( 'thumbnail_post' ); ?>
 	</div>
-	<div class="container-lg">
+	<div class="container-lg container-rcc-post">
 		<header class="entry-header alignwide">
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); 
-			
-			// função com "Postado em"
-			funcao_publicado_em();
+			<?php the_title( '<h1 class="entry-title titulo-post">', '</h1>' ); ?>
+			<div class="row">
+				<div class="col-md-6">
 
-			// Ícones de compartilhamento
-			echo do_shortcode('[shortcode_social_links]');
-			?>
+					<?php
+					// função com "Postado em"
+					funcao_publicado_em();?>
+				</div>
+				<div class="col-md-6 social-media-rcc">
+					<?php
+					// Ícones de compartilhamento
+					echo do_shortcode('[shortcode_social_links]');?>
+				</div>
+			</div>
 		</header><!-- .entry-header -->
 
-		<div class="entry-content">
+		<div class="entry-content entry-content-rcc">
 			<?php
 			the_content();
 			
@@ -52,10 +58,22 @@
 			<?php
 				// função com Categorias, Tags e Editar
 				funcao_post_footer();
-
-				// Ícones de compartilhamento
-				echo do_shortcode('[shortcode_social_links]');
 			?>
+
+			<div class="row">
+				<div class="col-md-6">
+
+					<?php
+					// função com "like em"
+					echo do_shortcode('[posts_like_dislike id='.get_the_ID().']');?>
+				</div>
+				<div class="col-md-6 social-media-rcc">
+					<?php
+					// Ícones de compartilhamento
+					echo do_shortcode('[shortcode_social_links]');?>
+				</div>
+			</div>
+
 		</footer><!-- .entry-footer -->
 		
 		<!-- Não mostra nada no post -->

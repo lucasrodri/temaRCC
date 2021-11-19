@@ -679,7 +679,7 @@ function dsgov_breadcrumb() {
 	echo '<div class="br-button circle"'. $onclick .'><span class="sr-only">Página inicial</span><i class="icon fas fa-home"></i></div>';
 	echo '</li>';
 
-	if (is_category() || is_single()) {
+	if (is_category() || is_single() || is_tag()) {
 		echo '<li class="crumb"><i class="icon fas fa-chevron-right"></i>';
 		//the_category(' &bull; ');
 		echo '<a href="'.get_post_type_archive_link( 'post' ).'"> Post </a>';
@@ -688,6 +688,10 @@ function dsgov_breadcrumb() {
 		if (is_single()) {
 			echo '<li class="crumb" data-active="active"><i class="icon fas fa-chevron-right"></i><span>';
 			the_title();
+			echo '</span></li>';
+		} else {
+			echo '<li class="crumb" data-active="active"><i class="icon fas fa-chevron-right"></i><span>';
+			echo '<a href="'.get_post_type_archive_link( 'archive' ).'"> '.get_the_archive_title().' </a>';
 			echo '</span></li>';
 		}
 	} elseif (is_page()) {
@@ -729,7 +733,7 @@ function funcao_publicado_em() {
 		esc_attr( get_the_date( DATE_W3C ) ), //mostrado dentro da tag datetime no html
 		esc_html( get_the_date( "d/m/Y H:i") ) //mostrado no post
 	);
-	echo '<span class="posted-on">';
+	echo '<span class="posted-on posted-rcc">';
 	printf(
 		/* translators: %s: Publish date. */
 		'Publicado em %s',
@@ -741,7 +745,7 @@ function funcao_publicado_em() {
 function funcao_post_footer() {
 	if ( has_category() || has_tag() ) {
 
-        echo '<div class="post-taxonomies">';
+        echo '<div class="post-taxonomies cat-links-rcc">';
 
         /* translators: Used between list items, there is a space after the comma. */
         $categories_list = get_the_category_list( __( ', ', 'twentytwentyone' ) );
@@ -752,13 +756,14 @@ function funcao_post_footer() {
             $categories_list // phpcs:ignore WordPress.Security.EscapeOutput
           );
         }
-
+		echo '</div>';
+		echo '<div class="post-taxonomies tag-links-rcc">';
         /* translators: Used between list items, there is a space after the comma. */
-        $tags_list = get_the_tag_list( '', __( ', ', 'twentytwentyone' ) );
+        $tags_list = get_the_tag_list( '', __( ' ', 'twentytwentyone' ) );
         if ( $tags_list ) {
           printf(
             /* translators: %s: List of tags. */
-            '<span class="tags-links">' . esc_html__( 'Tagged %s', 'twentytwentyone' ) . '</span>',
+            //'<span class="tags-links">' . esc_html__( 'Tagged %s', 'twentytwentyone' ) . '</span>',
             $tags_list // phpcs:ignore WordPress.Security.EscapeOutput
           );
         }
