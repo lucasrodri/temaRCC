@@ -858,6 +858,7 @@ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category'
 {
 	$args = array(
 		'showposts' => $r_post_num,
+		'order' => "ASC",
 		'tax_query' => array(
 			array(
 				'post_type' => $r_type,
@@ -869,21 +870,25 @@ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category'
 			)
 		)
 	);
-	query_posts($args);
-	if (have_posts()) {
+	$the_query = new WP_Query( $args );
+	// The Loop
+	if ( $the_query->have_posts() ) {
 		echo '<ol>';
-
-		while (have_posts()) : the_post();
-		?>
-			<li>
-
-				<p class="entry mt-1" title="<?php echo get_field('texto_hover'); ?>"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
-			</li>
-		<?php
-
-		endwhile;
+		while ( $the_query->have_posts() ) {
+			echo '<li>';
+			$the_query->the_post();
+			?>
+			<div class="tooltip"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+  				<span class="tooltiptext"><?php echo get_field('texto_hover'); ?></span>
+			</div>
+			<?php
+			echo '</li>';
+		}
 		echo '</ol>';
+	} else {
+		// no posts found
 	}
+	/* Restore original Post Data */
 	wp_reset_postdata();
 }
 
@@ -908,7 +913,7 @@ function gerar_redes_principal($r_type, $r_tax)
 
 	echo '<div class="br-accordion">';
 	
-	for ($i = 1; $i <= sizeof($categorias_id); $i++) {
+	for ($i = 0; $i < sizeof($categorias_id); $i++) {
 		$subcategoria = $categorias_name[$i];
 
 		$filhos_args = array(
@@ -939,13 +944,13 @@ function gerar_redes_principal($r_type, $r_tax)
 					<span class="title"><?php echo $subcategoria_filho; ?></span>
 					
 					<?php
-					meu_arrr_custom_loop($r_type, -10, $r_tax, $subcategoria_filho);
+					meu_arrr_custom_loop($r_type, -1, $r_tax, $subcategoria_filho);
 					?>
 
 				<?php 
 				} //fechamento do foreach
 			} else {
-				meu_arrr_custom_loop($r_type, -10, $r_tax, $subcategoria);
+				meu_arrr_custom_loop($r_type, -1, $r_tax, $subcategoria);
 			}
 
 			?>
