@@ -17,10 +17,15 @@ $description = get_the_archive_description();
 <?php if ( have_posts() ) : ?>
 
 	<?php
-		echo "<div class=\"container-lg\">";
-		echo "<div class=\"breadcrumb-post\" style=\"margin-left: -24px;\">";
-		echo do_shortcode('[shortcode_breadcrumb]');
-		echo "</div></div>";
+		$rede_slug = "rede-de-pesquisa";
+		$rede_name = "Rede de Pesquisa";
+		$categoria_rede = "pesquisa_categoria";
+	
+		echo "<div class=\"container-lg d-block\">";
+			echo "<div class=\"breadcrumb-post\" style=\"margin-left: -24px;\">";
+				echo do_shortcode('[shortcode_breadcrumb_redes rede_slug="'.$rede_slug.'" rede_name="'.$rede_name.'" categoria_slug="'.$term_slug.'" categoria_name="'.$terms_string.'" categoria_rede="'.$categoria_rede.'" type="archive"]');
+			echo "</div>";
+		echo "</div>";
 	?>
 
 	<div class="container-lg d-block">
@@ -34,7 +39,7 @@ $description = get_the_archive_description();
 		<div class="row">
 			<?php while ( have_posts() ) : ?>
 				<?php the_post(); ?>
-				<?php get_template_part( 'template-parts/content/content', get_theme_mod( 'display_excerpt_or_full_post', 'archive' ) ); ?>
+				<?php get_template_part( 'template-parts/redes/redes-archive' ); ?>
 			<?php endwhile; ?>
 		</div>
 

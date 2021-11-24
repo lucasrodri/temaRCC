@@ -15,9 +15,9 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	
-	$rede_slug = "rede-de-pesquisa";
-	$rede_name = "Rede de Pesquisa";
-	$categoria_rede = "pesquisa_categoria";
+	$rede_slug = "rede-de-produto";
+	$rede_name = "Rede de Produto";
+	$categoria_rede = "produto_categoria";
 
 	/* Pegar a taxonomia do post
 	https://developer.wordpress.org/reference/functions/get_the_terms/#comment-2587 */

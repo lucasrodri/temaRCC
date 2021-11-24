@@ -15,14 +15,7 @@ $description = get_the_archive_description();
 ?>
 
 <?php if ( have_posts() ) : ?>
-
-	<?php
-		echo "<div class=\"container-lg\">";
-		echo "<div class=\"breadcrumb-post\" style=\"margin-left: -24px;\">";
-		echo do_shortcode('[shortcode_breadcrumb]');
-		echo "</div></div>";
-	?>
-
+	<div class="mb-5"></div>
 	<div class="container-lg d-block">
 
 		<header class="page-header alignwide">
@@ -34,7 +27,7 @@ $description = get_the_archive_description();
 		<div class="row">
 			<?php while ( have_posts() ) : ?>
 				<?php the_post(); ?>
-				<?php get_template_part( 'template-parts/content/content', get_theme_mod( 'display_excerpt_or_full_post', 'archive' ) ); ?>
+				<?php get_template_part( 'template-parts/redes/redes-archive' ); ?>
 			<?php endwhile; ?>
 		</div>
 
@@ -45,7 +38,5 @@ $description = get_the_archive_description();
 <?php else : ?>
 	<?php get_template_part( 'template-parts/content/content-none' ); ?>
 <?php endif; ?>
-
 <div class="mb-5"></div>
-
 <?php get_footer(); ?>

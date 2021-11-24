@@ -15,18 +15,20 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	
-	echo "<div class=\"container-lg d-block\">";
-	echo "<div class=\"breadcrumb-post\" style=\"margin-left: -24px;\">";
-	echo do_shortcode('[shortcode_breadcrumb]');
-	echo "</div>";
+	$rede_slug = "rede-de-suporte";
+	$rede_name = "Rede de Suporte";
+	$categoria_rede = "suporte_categoria";
 
 	/* Pegar a taxonomia do post
 	https://developer.wordpress.org/reference/functions/get_the_terms/#comment-2587 */
-	$term_obj_list = get_the_terms( get_the_id(), 'suporte_categoria' );
-	$terms_string = join(', ', wp_list_pluck($term_obj_list, 'name'));
-	
-	echo "<h3>Rede de Suporte</h3>";
-	echo "<h4>".$terms_string."</h4>";
+	$term_obj_list = get_the_terms( get_the_id(), $categoria_rede );
+	$terms_string = wp_list_pluck($term_obj_list, 'name')[0];
+	$term_slug = wp_list_pluck($term_obj_list, 'slug')[0];
+
+	echo "<div class=\"container-lg d-block\">";
+		echo "<div class=\"breadcrumb-post\" style=\"margin-left: -24px;\">";
+			echo do_shortcode('[shortcode_breadcrumb_redes rede_slug="'.$rede_slug.'" rede_name="'.$rede_name.'" categoria_slug="'.$term_slug.'" categoria_name="'.$terms_string.'" categoria_rede="'.$categoria_rede.'"]');
+		echo "</div>";
 	echo "</div>";
 
 	get_template_part( 'template-parts/redes/redes-single' );
