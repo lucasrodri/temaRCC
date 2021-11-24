@@ -908,27 +908,18 @@ function gerar_redes_principal($r_type, $r_tax)
 	);
 
 	$allthecats = get_categories($args);
-	$categorias_id = wp_list_pluck($allthecats, 'term_id');
-	$categorias_name = wp_list_pluck($allthecats, 'name');
+	//$categorias_id = wp_list_pluck($allthecats, 'term_id');
+	//$categorias_name = wp_list_pluck($allthecats, 'name');
+	$categorias_array = wp_list_pluck($allthecats, 'name', 'term_id');
 
 	echo '<div class="br-accordion">';
 	
-	for ($i = 0; $i < sizeof($categorias_id); $i++) {
-		$subcategoria = $categorias_name[$i];
-
-		$filhos_args = array(
-			'taxonomy'	=> $r_tax,
-			'orderby'	=> 'name',
-			'parent'	=> $categorias_id[$i],
-		);
-
-		$filhos_categorias  = get_categories($filhos_args);
-		$lista_filhos = wp_list_pluck($filhos_categorias, 'name');
-
+	$i=0;
+	foreach ($categorias_array as $categoria_id => $categoria) {
 		?>
 		<div class="item">
 			<button class="header" type="button" aria-controls="id<?php echo $i; ?>">
-				<span class="title"><?php echo $subcategoria; ?></span>
+				<span class="title"><?php echo $categoria; ?></span>
 				<span class="icon">
 					<i class="fas fa-angle-down" aria-hidden="true"></i>
 				</span>
@@ -937,27 +928,37 @@ function gerar_redes_principal($r_type, $r_tax)
 		<div class="content" id="id<?php echo $i; ?>">
 			<?php
 
-			if (sizeof($lista_filhos) > 0) {
-				foreach ($lista_filhos as $subcategoria_filho) {
+			$filhos_args = array(
+				'taxonomy'	=> $r_tax,
+				'orderby'	=> 'name',
+				'parent'	=> $categoria_id,
+			);
+
+			$filhos_categorias  = get_categories($filhos_args);
+			$filhos_lista = wp_list_pluck($filhos_categorias, 'name');
+
+			if (sizeof($filhos_lista) > 0) {
+				foreach ($filhos_lista as $categoria_filho) {
 				?>
 					<span class="icon"><i class="fas fa-plus" aria-hidden="true"></i></span>
-					<span class="title"><?php echo $subcategoria_filho; ?></span>
+					<span class="title"><?php echo $categoria_filho; ?></span>
 					
 					<?php
-					meu_arrr_custom_loop($r_type, -1, $r_tax, $subcategoria_filho);
+					meu_arrr_custom_loop($r_type, -1, $r_tax, $categoria_filho);
 					?>
 
 				<?php 
 				} //fechamento do foreach
 			} else {
-				meu_arrr_custom_loop($r_type, -1, $r_tax, $subcategoria);
+				meu_arrr_custom_loop($r_type, -1, $r_tax, $categoria);
 			}
 
 			?>
 		</div>
-	<?php
-	
-	}
+		<?php
+		$i += 1;
+		
+	} // fim do foreach
 	echo '</div>';
 }
 
