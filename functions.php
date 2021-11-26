@@ -963,46 +963,25 @@ function gerar_redes_principal($r_type, $r_tax)
 	echo '</div>';
 }
 
-add_shortcode('shortcode_redes_suporte', 'redes_suporte');
-function redes_suporte()
-{
-	gerar_redes_principal('rede-de-suporte', 'suporte_categoria');
-}
-
 /**
- * ATENCAO Função de teste
- * pode ser apagada
+ * Shortcode das redes, criados com função anônima
  */
-function redes_suporte1()
-{
-	/* https://wordpress.stackexchange.com/a/215963 */
-	$args = array(
-		'taxonomy'	=> 'suporte_categoria',
-		'orderby'	=> 'name',
-	);
+add_shortcode('shortcode_redes_suporte', function () {
+	gerar_redes_principal('rede-de-suporte', 'suporte_categoria');
+});
 
-	$allthecats = get_categories($args);
-	$listacategorias = wp_list_pluck($allthecats, 'name');
+add_shortcode('shortcode_redes_pesquisa', function () {
+	gerar_redes_principal('rede-de-pesquisa', 'pesquisa_categoria');
+});
 
-	echo '<div class="br-accordion">';
-	$i = 0;
-	foreach ($listacategorias as $categoria) {
-	?>
-		<div class="item">
-			<button class="header" type="button" aria-controls="id<?php echo $i; ?>">
+add_shortcode('shortcode_redes_formacao', function () {
+	gerar_redes_principal('rede-de-formacao', 'formacao_categoria');
+});
 
-				<span class="title"><?php echo $categoria; ?></span>
+add_shortcode('shortcode_redes_inovacao', function () {
+	gerar_redes_principal('rede-de-inovacao', 'inovacao_categoria');
+});
 
-				<span class="icon">
-					<i class="fas fa-angle-down" aria-hidden="true"></i>
-				</span>
-			</button>
-		</div>
-		<div class="content" id="id<?php echo $i; ?>">
-			<?php meu_arrr_custom_loop('rede-de-suporte', -10, 'suporte', $categoria); ?>
-		</div>
-<?php
-		$i += 1;
-	}
-	echo '</div>';
-}
+add_shortcode('shortcode_redes_produto', function () {
+	gerar_redes_principal('rede-de-produto', 'produto_categoria');
+});
