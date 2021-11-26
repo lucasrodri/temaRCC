@@ -9,8 +9,8 @@ function myFunctionBusca() {
     window.location.href = "/?s=" + termo;
 }
 
-jQuery(document).ready( function ($) {  
-    (function () {
+jQuery(document).ready(function($) {
+    (function() {
         var Contrast = {
             storage: 'contrastState',
             cssClass: 'contrast',
@@ -23,7 +23,7 @@ jQuery(document).ready( function ($) {
             updateView: updateViewContrast
         };
 
-        window.toggleContrast = function () { Contrast.toogle(); };
+        window.toggleContrast = function() { Contrast.toogle(); };
 
         Contrast.check();
 
@@ -44,17 +44,13 @@ jQuery(document).ready( function ($) {
 
         function updateViewContrast() {
             var body = document.body;
-            if (this.currentState === null)
-                {
+            if (this.currentState === null) {
                 this.currentState = this.getState();
                 //body.classList.add(this.cssClass);
-                }
-            if (this.currentState || this.contador==1)
-            {
-                body.classList.add(this.cssClass);
             }
-            else if(this.currentState!=null && this.contador>0)
-            {
+            if (this.currentState || this.contador == 1) {
+                body.classList.add(this.cssClass);
+            } else if (this.currentState != null && this.contador > 0) {
                 body.classList.remove(this.cssClass);
             }
         }
@@ -66,3 +62,22 @@ jQuery(document).ready( function ($) {
 });
 
 
+/**
+ * Função para mostrar o card com o texto de mouse over
+ */
+function mouseOver(objeto) {
+    var card = document.getElementById('texto-hover');
+    var titulo = objeto.getElementsByTagName('a')[0];
+    var span = objeto.getElementsByTagName('span')[0];
+
+    card.innerHTML = '<strong>' + titulo.innerText + '</strong><br>' + span.innerText;
+    card.style.visibility = "visible";
+}
+
+/**
+ * Função para esconder o card
+ */
+function mouseOut() {
+    var card = document.getElementById('texto-hover');
+    card.style.visibility = "hidden";
+}

@@ -878,8 +878,8 @@ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category'
 			echo '<li>';
 			$the_query->the_post();
 			?>
-			<div class="tooltip"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-  				<span class="tooltiptext"><?php echo get_field('texto_hover'); ?></span>
+			<div onmouseover="mouseOver(this);" onmouseout="mouseOut();"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+  				<span class='d-none'><?php echo get_field('texto_hover'); ?></span>
 			</div>
 			<?php
 			echo '</li>';
@@ -912,6 +912,7 @@ function gerar_redes_principal($r_type, $r_tax)
 	//$categorias_name = wp_list_pluck($allthecats, 'name');
 	$categorias_array = wp_list_pluck($allthecats, 'name', 'term_id');
 
+	echo '<div id="texto-hover"></div>';
 	echo '<div class="br-accordion">';
 	
 	$i=0;
@@ -968,6 +969,10 @@ function redes_suporte()
 	gerar_redes_principal('rede-de-suporte', 'suporte_categoria');
 }
 
+/**
+ * ATENCAO Função de teste
+ * pode ser apagada
+ */
 function redes_suporte1()
 {
 	/* https://wordpress.stackexchange.com/a/215963 */

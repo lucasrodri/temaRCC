@@ -209,10 +209,11 @@
 
 /*CSS para mostrar o tolltip das redes*/
 
+
+/*
 .tooltip {
     position: relative;
     display: inline-block;
-    /*border-bottom: 1px dotted black;*/
 }
 
 .tooltip .tooltiptext {
@@ -223,7 +224,6 @@
     text-align: justify;
     border-radius: 6px;
     padding: 15px 20px 15px 20px;
-    /* Position the tooltip */
     position: absolute;
     z-index: 1;
     top: -5px;
@@ -244,4 +244,24 @@
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+*/
+
+#texto-hover {
+    background: white;
+    /*color: white;*/
+    top: 30%;
+    right: 5%;
+    left: 45%;
+    position: absolute;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: #1351B4;
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    margin: 20px;
+    padding: 10px;
+    visibility: hidden;
 }
