@@ -879,7 +879,7 @@ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category'
 			$the_query->the_post();
 			?>
 			<div onmouseover="mouseOver(this);" onmouseout="mouseOut();"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-  				<span class='d-none'><?php echo get_field('texto_hover'); ?></span>
+  				<span class='d-none'><?php echo wp_trim_words(get_field('texto_hover'), 120) ?></span>
 			</div>
 			<?php
 			echo '</li>';
@@ -913,20 +913,20 @@ function gerar_redes_principal($r_type, $r_tax)
 	$categorias_array = wp_list_pluck($allthecats, 'name', 'term_id');
 
 	echo '<div id="texto-hover"></div>';
-	echo '<div class="br-accordion">';
+	echo '<div class="br-accordion" single="single">';
 	
 	$i=0;
 	foreach ($categorias_array as $categoria_id => $categoria) {
 		?>
 		<div class="item">
 			<button class="header" type="button" aria-controls="id<?php echo $i; ?>">
-				<span class="title"><?php echo $categoria; ?></span>
+				<span class="title titulo-redes"><?php echo $categoria; ?></span>
 				<span class="icon">
 					<i class="fas fa-angle-down" aria-hidden="true"></i>
 				</span>
 			</button>
 		</div>
-		<div class="content" id="id<?php echo $i; ?>">
+		<div class="content conteudo-redes" id="id<?php echo $i; ?>">
 			<?php
 
 			$filhos_args = array(
@@ -941,8 +941,8 @@ function gerar_redes_principal($r_type, $r_tax)
 			if (sizeof($filhos_lista) > 0) {
 				foreach ($filhos_lista as $categoria_filho) {
 				?>
-					<span class="icon"><i class="fas fa-plus" aria-hidden="true"></i></span>
-					<span class="title"><?php echo $categoria_filho; ?></span>
+					<span class="icon" style='color: #1351b4;'><i class="fas fa-plus" aria-hidden="true"></i></span>
+					<span class="title subtitulo-redes"><?php echo $categoria_filho; ?></span>
 					
 					<?php
 					meu_arrr_custom_loop($r_type, -1, $r_tax, $categoria_filho);

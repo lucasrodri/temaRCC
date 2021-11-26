@@ -280,3 +280,24 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.br-accordion .titulo-redes {
+    font-size: 18px;
+}
+
+.br-accordion .subtitulo-redes {
+    color: #1351b4;
+    font-size: 16px;
+}
+
+.br-accordion .conteudo-redes {
+    padding-left: 0px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.br-accordion .conteudo-redes a {
+    color: black;
+    border-bottom: 1px dotted black;
+}
