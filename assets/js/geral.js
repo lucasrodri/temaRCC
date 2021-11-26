@@ -70,7 +70,7 @@ function mouseOver(objeto) {
     var titulo = objeto.getElementsByTagName('a')[0];
     var span = objeto.getElementsByTagName('span')[0];
 
-    card.innerHTML = '<strong>' + titulo.innerText + '</strong><br>' + span.innerText;
+    card.innerHTML = '<div class="titulo-hover">' + titulo.innerText + '</div>' + span.innerText;
     card.style.visibility = "visible";
 }
 
