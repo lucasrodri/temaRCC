@@ -912,7 +912,7 @@ function gerar_redes_principal($r_type, $r_tax)
 	//$categorias_name = wp_list_pluck($allthecats, 'name');
 	$categorias_array = wp_list_pluck($allthecats, 'name', 'term_id');
 
-	echo '<div id="texto-hover"></div>';
+	echo '<div class="texto-hover" id="texto-hover-'.$r_type.'"></div>';
 	echo '<div class="br-accordion" single="single">';
 	
 	$i=0;

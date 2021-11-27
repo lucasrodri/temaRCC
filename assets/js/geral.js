@@ -66,18 +66,21 @@ jQuery(document).ready(function($) {
  * Função para mostrar o card com o texto de mouse over
  */
 function mouseOver(objeto) {
-    var card = document.getElementById('texto-hover');
+    var card = document.getElementsByClassName('texto-hover');
     var titulo = objeto.getElementsByTagName('a')[0];
     var span = objeto.getElementsByTagName('span')[0];
-
-    card.innerHTML = '<div class="titulo-hover">' + titulo.innerText + '</div>' + span.innerText;
-    card.style.visibility = "visible";
+    for(var i = 0; i < card.length; i++){
+        card[i].innerHTML = '<div class="titulo-hover">' + titulo.innerText + '</div>' + span.innerText;
+        card[i].style.visibility = "visible";
+    }
 }
 
 /**
  * Função para esconder o card
  */
 function mouseOut() {
-    var card = document.getElementById('texto-hover');
-    card.style.visibility = "hidden";
+    var card = document.getElementsByClassName('texto-hover');
+    for(var i = 0; i < card.length; i++){
+        card[i].style.visibility = "hidden";
+    }
 }
