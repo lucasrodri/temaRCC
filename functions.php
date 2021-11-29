@@ -879,7 +879,7 @@ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category'
 			echo '<li>';
 			$the_query->the_post();
 			?>
-			<div onmouseover="mouseOver(this);" onmouseout="mouseOut();"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+			<div onmouseover="mouseOver(this);" onmouseout="mouseOut();"><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); ?></a>
   				<span class='d-none'><?php echo wp_trim_words(get_field('texto_hover'), 120) ?></span>
 			</div>
 			<?php

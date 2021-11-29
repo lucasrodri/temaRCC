@@ -20,7 +20,7 @@
 
 					<?php
 					// função com "Postado em"
-					funcao_publicado_em();?>
+					//funcao_publicado_em();?>
 				</div>
 				<div class="col-md-6 social-media-rcc">
 					<?php
