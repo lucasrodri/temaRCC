@@ -859,6 +859,7 @@ function meu_arrr_custom_loop($r_type = 'post', $r_post_num, $r_tax = 'category'
 	$args = array(
 		'showposts' => $r_post_num,
 		'order' => "ASC",
+		'orderby' => "title",
 		'tax_query' => array(
 			array(
 				'post_type' => $r_type,
