@@ -968,7 +968,7 @@ function gerar_redes_principal($r_type, $r_tax)
  * Shortcode das redes, criados com função anônima
  */
 add_shortcode('shortcode_redes_suporte', function () {
-	gerar_redes_principal('rede-de-suporte', 'suporte_categoria');
+	gerar_redes_principal('rede-de-suporte', 'suporte_categoria_nova');
 });
 
 add_shortcode('shortcode_redes_pesquisa', function () {
@@ -986,3 +986,14 @@ add_shortcode('shortcode_redes_inovacao', function () {
 add_shortcode('shortcode_redes_produto', function () {
 	gerar_redes_principal('rede-de-produto', 'produto_categoria');
 });
+
+function chama_shortcode_redes($params) {
+	$var = shortcode_atts([
+			'rede_slug' => 'rede-de-suporte',
+			'categoria_slug' => 'suporte_categoria',
+	], $params);
+	gerar_redes_principal($var['rede_slug'], $var['categoria_slug']);
+}
+
+#Ex: [shortcode_redes rede_slug="rede-de-suporte" categoria_slug="suporte_categoria"] 
+add_shortcode('shortcode_redes', 'chama_shortcode_redes');
