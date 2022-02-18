@@ -17,7 +17,7 @@ while ( have_posts() ) :
 	
 	$rede_slug = "rede-de-suporte";
 	$rede_name = "Rede de Suporte";
-	$categoria_rede = "suporte_categoria";
+	$categoria_rede = "suporte_categoria_nova";
 
 	/* Pegar a taxonomia do post
 	https://developer.wordpress.org/reference/functions/get_the_terms/#comment-2587 */
